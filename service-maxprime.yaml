@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1alpha1 
+kind: Service
+metadata:
+  name: maxprime
+  namespace: default 
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/maxprime
+          env:
+            - name: TARGET 
+              value: "Max Prime Sample v1"
+

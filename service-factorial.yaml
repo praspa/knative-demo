@@ -1,0 +1,26 @@
+
+
+apiVersion: serving.knative.dev/v1alpha1 
+kind: Service
+metadata:
+  name: factorial
+  namespace: factorial
+spec:
+  template:
+    metadata:
+      annotations:
+       autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+       autoscaling.knative.dev/metric: cpu
+    spec:
+      containers:
+        - image: image-registry.openshift-image-registry.svc:5000/factorial/factorial
+          env:
+            - name: FOO
+              value: "BAR"
+          resources:
+            limits:
+              cpu: "250m"
+            requests:
+              cpu: "250m"
+
+
